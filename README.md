@@ -27,14 +27,14 @@ passes each key, you can typically obtain results like these:
   NSMutableDictionary
 
 Obviously, using integers as keys (specifically integers in the range 0
-- 2^31-1, MSB must be left unused) is not for every application, but in
+to 2^31-1, MSB must be left unused) is not for every application, but in
 some cases they can fit very well. Moreover, a pair of macros have been
 included with which you can easily transform a C string or an NSString
 to a 32 bit integer by shifting first 4 chars accordingly. Consider the
 added overhead, anyway. Use them in this way:
 
-  STR_2_UINT("abcd") = 0x61626364
-  NSSTR_2UINT(@"KEY") = 0x4B455900
+	STR_2_UINT("abcd") = 0x61626364
+	NSSTR_2UINT(@"KEY") = 0x4B455900
 
 FastDictionary has been tested, but you know: bugs can hide in every
 corner of software development, so use it at your own risk. Of course,
@@ -55,8 +55,8 @@ Use of the fast dictionary is pretty straightforward. When creating an
 instance it's important to give it a good estimate of the expected
 number of keys:
 
-  FDFastDictionary *fastDict= fastDict= [[FDFastDictionary alloc]
-    initWithCapacity:num_of_keys];
+	FDFastDictionary *fastDict= fastDict= [[FDFastDictionary alloc]
+		initWithCapacity:num_of_keys];
 
 Initializing the dictionary may take a while: it will look for a prime
 number close to your number of keys. Do it when you can waste a few seconds,
@@ -64,18 +64,18 @@ if your expected number of keys is large.
 
 You can then switch on the use on inline assembly code with its property:
 
-  fastDict.useInlineAsm= YES;
+	fastDict.useInlineAsm= YES;
 
 Finally, put, get or remove key/value pairs with its respective methods:
 
-  // Add a key/value pair
-  [fastDict putKey:key withValue:value];
+	// Add a key/value pair
+	[fastDict putKey:key withValue:value];
 
-  // Get value by key
-  id value= [fastDict getKey:key];
+	// Get value by key
+	id value= [fastDict getKey:key];
 
-  // Remove a value by key
-  id value= [fastDict removeKey:key];
+	// Remove a value by key
+	id value= [fastDict removeKey:key];
 
 License
 -------
